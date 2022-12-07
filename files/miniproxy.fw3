@@ -93,6 +93,7 @@ function add_ipv6_set() {
         ipset flush wan6
     fi
     ipset add wan6 $(ifstatus wan6 | jsonfilter -e '@["ipv6-prefix"][0].address')/$(ifstatus wan6 | jsonfilter -e '@["ipv6-prefix"][0].mask')
+    ipset add wan6 $(ifstatus wan6 | jsonfilter -e '@["ipv6-address"][0].address')/$(ifstatus wan6 | jsonfilter -e '@["ipv6-address"][0].mask')
 }
 
 #del_set
