@@ -3,10 +3,10 @@
 #add_rule
 function add_ipv4_rule() {
     if [ -z "$(ip -4 route show table all | grep 'local default dev lo table 256 scope host')" ]; then
-        ip route add local default dev lo table 256
+        ip -4 route add local default dev lo table 256
     fi
     if [ -z "$(ip -4 rule | grep 'from all fwmark 0x100 lookup 256')" ]; then
-        ip rule add fwmark 0x100 table 256
+        ip -4 rule add fwmark 0x100 table 256
     fi
 }
 function add_ipv6_rule() {
@@ -21,10 +21,10 @@ function add_ipv6_rule() {
 #del_rule
 function del_ipv4_rule() {
     if [ -z "$(ip -4 route show table all | grep 'local default dev lo table 256 scope host')" ]; then
-        ip route del local default dev lo table 256
+        ip -4 route del local default dev lo table 256
     fi
     if [ -n "$(ip -4 rule | grep 'from all fwmark 0x100 lookup 256')" ]; then
-        ip rule del fwmark 0x100 table 256
+        ip -4 rule del fwmark 0x100 table 256
     fi
 }
 function del_ipv6_rule() {
