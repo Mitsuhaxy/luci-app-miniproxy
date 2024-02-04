@@ -162,8 +162,8 @@ function stop_all_service() {
     disable_ipv6_tproxy
     del_ipv4_rule
     del_ipv6_rule
-    del_ipv6_set
     del_ipv4_set
+    del_ipv6_set
 }
 
 #start_service
