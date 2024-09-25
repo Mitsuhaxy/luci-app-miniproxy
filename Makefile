@@ -42,8 +42,8 @@ define Package/luci-app-miniproxy/install
 	$(INSTALL_DATA) ./files/miniproxy.acl $(1)/usr/share/rpcd/acl.d/luci-app-miniproxy.json
 	$(INSTALL_DATA) ./files/miniproxy.menu $(1)/usr/share/luci/menu.d/luci-app-miniproxy.json
 	$(INSTALL_DATA) ./files/miniproxy.js $(1)/www/luci-static/resources/view/miniproxy.js
+	$(INSTALL_BIN) ./files/miniproxy $(1)/usr/bin/miniproxy
 	po2lmo ./files/miniproxy.zh-cn.po $(1)/usr/lib/lua/luci/i18n/miniproxy.zh-cn.lmo
-	$(INSTALL_BIN) ./files/miniproxy.fw4 $(1)/usr/bin/miniproxy
 endef
 
 $(eval $(call BuildPackage,luci-app-miniproxy))
