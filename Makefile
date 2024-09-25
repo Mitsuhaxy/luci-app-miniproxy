@@ -15,7 +15,7 @@ define Package/luci-app-miniproxy
 	SECTION:=Custom
 	CATEGORY:=Extra packages
 	TITLE:=Easy set transparent proxy for openwrt.
-	DEPENDS:=+luci-base +ip-full +PACKAGE_firewall4:kmod-nft-tproxy +PACKAGE_firewall:ipset +PACKAGE_firewall:kmod-ipt-tproxy +PACKAGE_firewall:iptables +PACKAGE_firewall:iptables-mod-tproxy
+	DEPENDS:=+luci-base +ip-full +kmod-nft-tproxy
 	PKGARCH:=all
 endef
 
@@ -43,14 +43,7 @@ define Package/luci-app-miniproxy/install
 	$(INSTALL_DATA) ./files/miniproxy.menu $(1)/usr/share/luci/menu.d/luci-app-miniproxy.json
 	$(INSTALL_DATA) ./files/miniproxy.js $(1)/www/luci-static/resources/view/miniproxy.js
 	po2lmo ./files/miniproxy.zh-cn.po $(1)/usr/lib/lua/luci/i18n/miniproxy.zh-cn.lmo
-ifdef CONFIG_PACKAGE_firewall
-	$(INSTALL_DIR) $(1)/usr/bin/
-	$(INSTALL_BIN) ./files/miniproxy.fw3 $(1)/usr/bin/miniproxy
-endif
-ifdef CONFIG_PACKAGE_firewall4
-	$(INSTALL_DIR) $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/miniproxy.fw4 $(1)/usr/bin/miniproxy
-endif
 endef
 
 $(eval $(call BuildPackage,luci-app-miniproxy))
